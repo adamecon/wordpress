@@ -1,50 +1,74 @@
- <!-- footer section start -->
- <div class="footer_section layout_padding">
-     <div class="container">
-         <div class="footer_logo"><a href="index.html"><img src="images/footer-logo.png"></a></div>
-         <div class="input_bt">
-             <input type="text" class="mail_bt" placeholder="Your Email" name="Your Email">
-             <span class="subscribe_bt" id="basic-addon2"><a href="#">Subscribe</a></span>
-         </div>
-         <div class="footer_menu">
-             <ul>
-                 <li><a href="#">Best Sellers</a></li>
-                 <li><a href="#">Gift Ideas</a></li>
-                 <li><a href="#">New Releases</a></li>
-                 <li><a href="#">Today's Deals</a></li>
-                 <li><a href="#">Customer Service</a></li>
-             </ul>
-         </div>
-         <div class="location_main">Help Line Number : <a href="#">+1 1800 1200 1200</a></div>
-     </div>
- </div>
- <!-- footer section end -->
- <!-- copyright section start -->
- <div class="copyright_section">
-     <div class="container">
-         <p class="copyright_text">© 2020 All Rights Reserved. Design by <a href="https://html.design">Free html
-                 Templates</a></p>
-     </div>
- </div>
- <!-- copyright section end -->
- <!-- Javascript files-->
- <script src="js/jquery.min.js"></script>
- <script src="js/popper.min.js"></script>
- <script src="js/bootstrap.bundle.min.js"></script>
- <script src="js/jquery-3.0.0.min.js"></script>
- <script src="js/plugin.js"></script>
- <!-- sidebar -->
- <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
- <script src="js/custom.js"></script>
- <script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
+<?php
+/**
+ * The template for displaying the footer.
+ *
+ * Contains the closing of the #content div and all content after.
+ *
+ * @link    https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package Tyche
+ */
+?>
+</div><!-- #content -->
 
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
- </script>
- </body>
+<?php get_sidebar( 'footer' ); ?>
 
- </html>
+<?php
+$enable_copyright = get_theme_mod( 'tyche_enable_copyright', true );
+?>
+<?php if ( $enable_copyright ) : ?>
+	<!-- Copyright -->
+	<footer class="site-copyright">
+		<div class="site-info ">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<?php
+						if ( has_nav_menu( 'social' ) ) {
+
+							wp_nav_menu(
+								array(
+									'theme_location'  => 'social',
+									'container'       => 'div',
+									'container_id'    => 'menu-social',
+									'container_class' => 'menu pull-left',
+									'menu_id'         => 'menu-social-items',
+									'menu_class'      => 'menu-items',
+									'depth'           => 1,
+									'link_before'     => '<span class="screen-reader-text">',
+									'link_after'      => '</span>',
+									'fallback_cb'     => '',
+								)
+							);
+						}
+						?>
+
+						<div class="copyright-text pull-right">
+							<?php
+							echo wp_kses_post(
+								get_theme_mod(
+									'tyche_copyright_contents',
+									vsprintf(
+										// Translators: 1 is current year, 2 is separator, 3 is theme link.
+										__( 'Copyright &copy; %1$s %2$s %3$s %2$s Powered by WordPress.', 'tyche' ),
+										array(
+											date_i18n( __( 'Y', 'tyche' ) ),
+											'<span class="sep">|</span>',
+											sprintf( '<a href="https://colorlib.com/tyche">%s</a>', __( 'Theme: Tyche', 'tyche' ) ),
+										)
+									)
+								)
+							);
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!-- / Copyright -->
+<?php endif; ?>
+</div><!-- #page -->
+
+<?php wp_footer(); ?>
+
+</body></html>
